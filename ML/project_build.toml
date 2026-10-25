@@ -1,0 +1,67 @@
+default_preset = "win64"
+
+[common]
+build_mode = "modular"
+recursive = true
+cpp_standard = "c++20"
+# ★ **기본은 최적화 빌드다**(`-O2` + `-DNDEBUG`) — 디버거를 붙일 때만 `build.bat win64_dbg`.
+#   ⚠️⚠️ **이 프로젝트에서 특히 중요하다**: 학습 스텝 시간을 재는 것이 상시 작업인데 `-O0` 숫자는
+#     항목마다 1.6~4.3배로 **다르게** 부풀어서 "무엇을 먼저 고칠까" 의 순위 자체가 달라진다
+#     (→ Docs/Guide.md 의 🐌 절). CPU 레퍼런스 커널은 특히 `-O0` 에서 몇 배 느려 A/B 를 오염시킨다.
+debug = false
+clean_first = false
+verbose = false
+optimization = "-O2"
+jobs = 0
+generate_debug_info = true
+use_gdb_debug_format = true
+keep_frame_pointer = true
+enable_rtti = true
+enable_exceptions = true
+include_dirs = []
+lib_dirs = []
+libs = []
+extra_compile_flags = []
+extra_link_flags = []
+
+[common.defines]
+UNICODE = ""
+_UNICODE = ""
+
+[platforms.win64]
+enabled = true
+entry_output_kind = "exe"
+# ★ 콘솔 서브시스템 — 학습 로그(스텝/손실/그래디언트 체크 결과)가 그쪽으로 나간다.
+#   창 앱이면서 콘솔을 함께 두는 것은 이 저장소의 관례다(TWC 등 전부 그렇다).
+exe_subsystem = "console"
+output_name = ""
+toolchain_root = "../../ExternalTools/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64ucrt-14.0.0-r7/mingw64"
+dll_min_size = false
+dll_export_all_symbols = false
+static = false
+
+# ⚠️ **끈 상태다** — 이유는 `project.toml` 의 `[android]` 주석. 추론을 폰에 올릴 때 `true` 로 바꾼다.
+#   ⚠️⚠️ 그때 밟을 것 둘: ㉠ 컴퓨트 로컬그룹이 안드로이드에서 **128** 이다(데스크톱 256 —
+#     `RHICommandList_Vulkan.cpp`) ㉡ 실기 GPU 컴퓨트 함정 = `Docs/mobile_issue.md`.
+[platforms.android]
+enabled = false
+abi = "arm64-v8a"
+min_sdk = 24
+target_sdk = 35
+output_name = ""
+build_apk = false
+build_obb = false
+use_native_activity = true
+apk_asset_dir = "cooked_assets/Android"
+
+[presets.win64]
+platform = "win64"
+
+# 🐞 **디버거를 붙일 때만** 고르는 프리셋(`build.bat win64_dbg` — `-O0` + 심볼).
+#   ⚠️ `clean_first` 를 안 적는다 — 플래그 변화는 빌더가 스스로 알아채 전체 리빌드로 떨어진다.
+[presets.win64_dbg]
+platform = "win64"
+
+[presets.win64_dbg.common]
+debug = true
+optimization = ""

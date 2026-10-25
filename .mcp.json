@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "PEMCP": {
+      "type": "stdio",
+      "command": "cmd",
+      "args": ["/c", ".\\pemcp.bat"]
+    }
+  }
+}

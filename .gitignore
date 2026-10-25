@@ -218,3 +218,20 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+# ── PE 프로젝트 ──────────────────────────────────────────────────────────────
+# 엔진 자리(PC 마다 다르다) — 여기(공통) 또는 프로젝트 폴더(개별)에 한 줄 `engine=D:\GIT\PEE2`.
+#   프로젝트의 pe_engine.bat 이 읽는다(→ 엔진 저장소 Docs/ProjectWork.md).
+engine.ini
+# 빌드 · 쿡 산출물(어느 깊이에서든)
+_generated/
+.build/
+bin_dev/
+bin_win64/
+bin_android/
+cooked_assets/
+.vscode/
+*.log
+# devctl 스샷 · 개발 임시
+.temp/
+# 세이브 · 사용자 데이터(PlatformFileSource::UserData 의 win64 자리)
+*/userdata/

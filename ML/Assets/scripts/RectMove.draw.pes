@@ -1,0 +1,24 @@
+// 4칸 — 네모가 옆으로 간다. 3칸에서 **시간축**이 처음 생긴다: 그림이 여러 장이 된다.
+domain draw
+
+// 왼쪽 끝에서 시작한다
+self.x := 14
+// 한 장 넘어갈 때마다 이만큼 옮긴다. 늘 같은 만큼이다
+self.step := 5
+
+func OnStart()
+{
+    Draw::Clear(0, 0, 0)
+    Draw::Color(90, 170, 240)
+    Draw::RectFill(self.x, 52, 24, 24)
+}
+
+func OnFrame()
+{
+    // 있던 자리에서 한 걸음 나아간다
+    self.x = self.x + self.step
+    // 지난 그림은 지우고, 새 자리에 다시 그린다
+    Draw::Clear(0, 0, 0)
+    Draw::Color(90, 170, 240)
+    Draw::RectFill(self.x, 52, 24, 24)
+}

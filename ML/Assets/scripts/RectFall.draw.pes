@@ -1,0 +1,27 @@
+// 5칸 — 네모가 떨어진다. 4칸에서 **규칙 하나**가 더 생긴다: 걸음이 일정하지 않고 점점 커진다.
+domain draw
+
+// 위에서 시작한다
+self.y := 12
+// 아래로 내려가는 빠르기. 처음에는 멈춰 있다
+self.v := 0
+// 한 장마다 빠르기에 더해지는 양 — 이것 때문에 갈수록 빨라진다
+self.g := 2
+
+func OnStart()
+{
+    Draw::Clear(0, 0, 0)
+    Draw::Color(120, 220, 130)
+    Draw::RectFill(52, self.y, 24, 24)
+}
+
+func OnFrame()
+{
+    // 먼저 빠르기가 자란다
+    self.v = self.v + self.g
+    // 그 빠르기만큼 내려간다. 그래서 아래로 갈수록 그림 사이 간격이 벌어진다
+    self.y = self.y + self.v
+    Draw::Clear(0, 0, 0)
+    Draw::Color(120, 220, 130)
+    Draw::RectFill(52, self.y, 24, 24)
+}

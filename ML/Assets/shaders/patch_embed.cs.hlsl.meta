@@ -1,0 +1,5 @@
+type = "shader"
+
+[import]
+entry = "main"
+shader_model = "6_0"

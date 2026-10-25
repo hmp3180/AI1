@@ -35,7 +35,7 @@ entry_output_kind = "exe"
 #   창 앱이면서 콘솔을 함께 두는 것은 이 저장소의 관례다(TWC 등 전부 그렇다).
 exe_subsystem = "console"
 output_name = ""
-toolchain_root = "../../ExternalTools/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64ucrt-14.0.0-r7/mingw64"
+# toolchain_root 는 적지 않는다 — 엔진 기본값(<엔진 루트>/ExternalTools/…)을 쓴다(프로젝트가 엔진 밖에 있다).
 dll_min_size = false
 dll_export_all_symbols = false
 static = false
